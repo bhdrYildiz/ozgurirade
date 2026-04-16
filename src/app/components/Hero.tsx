@@ -1,0 +1,157 @@
+'use client'
+import { useState, useEffect, useCallback, useRef } from 'react'
+
+const slides = [
+    {
+        tag: 'Kurban Bağışı',
+        title: ['Kurban Beraber', 'Olsun'],
+        desc: 'Bağışlarınızla gönüller bir, kurban beraber olsun.',
+        bg: 'from-[#0d2b14] to-[#1a4a1e]',
+        href: '/bagis/kurban',
+    },
+    {
+        tag: 'Yetim Hâmiliği',
+        title: ['Yetime Şefkatli', 'Bir El Uzat'],
+        desc: 'Yetime şefkatli bir kalbin hâmiliği yakışır.',
+        bg: 'from-[#0f1f2b] to-[#0d2b1a]',
+        href: '/bagis/yetim',
+    },
+    {
+        tag: 'Acil Yardım — Gazze',
+        title: ['Gazze İçin', 'Hazırız'],
+        desc: "Ateşkesin ardından Gazze'de yaraları sarmak için çalışıyoruz.",
+        bg: 'from-[#121212] to-[#1c1c1c]',
+        href: '/bagis/filistin',
+    },
+    {
+        tag: 'Acil Yardım — Sudan',
+        title: ['Sudan Acil', 'Yardım'],
+        desc: 'Sudan halkına desteklerinizi ulaştırıyoruz.',
+        bg: 'from-[#1f1200] to-[#162b0f]',
+        href: '/bagis/sudan',
+    },
+]
+
+const DURATION = 5000
+
+export default function Hero() {
+    const [cur, setCur] = useState(0)
+    const [progress, setProgress] = useState(0)
+    const startRef = useRef<number>(0)
+    const rafRef = useRef<number>(0)
+
+    const goTo = useCallback((n: number) => {
+        setCur((n + slides.length) % slides.length)
+    }, [])
+
+    const prev = useCallback(() => goTo(cur - 1), [cur, goTo])
+    const next = useCallback(() => goTo(cur + 1), [cur, goTo])
+
+    useEffect(() => {
+        cancelAnimationFrame(rafRef.current)
+        startRef.current = performance.now()
+        setProgress(0)
+
+        const tick = (now: number) => {
+            const pct = Math.min(((now - startRef.current) / DURATION) * 100, 100)
+            setProgress(pct)
+            if (pct < 100) {
+                rafRef.current = requestAnimationFrame(tick)
+            } else {
+                setCur((p) => (p + 1) % slides.length)
+            }
+        }
+
+        rafRef.current = requestAnimationFrame(tick)
+        return () => cancelAnimationFrame(rafRef.current)
+    }, [cur])
+
+    const slide = slides[cur]
+
+    return (
+        <section className="relative h-[420px] md:h-[500px] overflow-hidden bg-[#0c1a10] rounded-2xl mx-4 md:mx-8 my-4">
+
+            {/* Slides */}
+            {slides.map((s, i) => (
+                <div
+                    key={i}
+                    className={`absolute inset-0 bg-gradient-to-br ${s.bg} transition-opacity duration-700 ${i === cur ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
+                >
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                </div>
+            ))}
+
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col justify-end px-8 md:px-12 pb-10 z-10">
+                <div className="max-w-lg">
+                    <p
+                        key={`tag-${cur}`}
+                        className="text-[10px] tracking-[0.14em] uppercase text-white/50 font-light mb-2.5 animate-fadeIn"
+                    >
+                        {slide.tag}
+                    </p>
+                    <h1
+                        key={`title-${cur}`}
+                        className="text-3xl md:text-4xl text-white mb-2.5 leading-[1.15] font-normal animate-fadeIn"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                        {slide.title[0]}
+                        <br />
+                        {slide.title[1]}
+                    </h1>
+                    <p
+                        key={`desc-${cur}`}
+                        className="text-xs text-white/60 font-light leading-relaxed mb-6 animate-fadeIn"
+                    >
+                        {slide.desc}
+                    </p>
+
+                    <a
+                        href={slide.href}
+                        className="text-[10px] tracking-[0.1em] uppercase text-white border-b border-white/40 pb-0.5 hover:border-white/90 transition-colors"
+                    >
+                        Detaylı Bilgi
+                    </a>
+                </div>
+        </div>
+
+      {/* Sağ navigasyon */ }
+    <div className="absolute bottom-10 right-8 md:right-12 z-20 flex flex-col items-end gap-3">
+        <span className="text-[10px] tracking-widest text-white/40">
+            {String(cur + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+        </span>
+        <div className="flex flex-col gap-1.5">
+            {slides.map((_, i) => (
+                <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className={`w-px transition-all duration-300 ${i === cur ? 'h-7 bg-white/80' : 'h-4 bg-white/25'
+                        }`}
+                />
+            ))}
+        </div>
+        <div className="flex gap-1.5">
+            <button
+                onClick={prev}
+                className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
+            >
+                ←
+            </button>
+            <button
+                onClick={next}
+                className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
+            >
+                →
+            </button>
+        </div>
+    </div>
+
+    {/* Progress bar */ }
+    <div
+        className="absolute bottom-0 left-0 h-[2px] bg-white/60 z-20 rounded-b-2xl"
+        style={{ width: `${progress}%`, transition: 'none' }}
+    />
+    </section >
+  )
+}
