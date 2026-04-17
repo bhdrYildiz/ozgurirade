@@ -1,43 +1,11 @@
-'use client'
 import Link from 'next/link'
 import { Calendar, ArrowRight } from 'lucide-react'
-
-const featured = {
-    title: 'Toplumsal Dayanışmanın Gücü ve Özgür İrade',
-    desc: 'İnsanın kendi hayatını şekillendirme süreci, sadece bireysel bir mesele değil aynı zamanda toplumsal bir sorumluluktur...',
-    date: '10 Nisan 2026',
-    image: '/images/blog-feature.jpg',
-    href: '/blog/1',
-}
-
-const blogs = [
-    {
-        id: 1,
-        title: 'Yardımlaşma Kültürünün Tarihsel Gelişimi',
-        date: '08 Nisan 2026',
-        href: '/blog/2',
-    },
-    {
-        id: 2,
-        title: 'Sosyal Sorumluluk Projelerinde Yeni Yaklaşımlar',
-        date: '05 Nisan 2026',
-        href: '/blog/3',
-    },
-    {
-        id: 3,
-        title: 'Aile Yapısının Toplum Üzerindeki Etkisi',
-        date: '02 Nisan 2026',
-        href: '/blog/4',
-    },
-    {
-        id: 4,
-        title: 'Bilinçli Toplum Oluşturmanın Temelleri',
-        date: '30 Mart 2026',
-        href: '/blog/5',
-    },
-]
+import { getFeaturedPost, getNonFeaturedPosts } from '@/app/blog/data/blog'
 
 export default function BlogSection() {
+    const featured = getFeaturedPost()
+    const rest = getNonFeaturedPosts().slice(0, 4)
+
     return (
         <section className="py-16 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -61,12 +29,12 @@ export default function BlogSection() {
 
                     {/* Featured */}
                     <Link
-                        href={featured.href}
+                        href={`/blog/${featured.slug}`}
                         className="md:col-span-2 group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition"
                     >
                         <div className="h-80 overflow-hidden">
                             <img
-                                src={featured.image}
+                                src={featured.coverImage}
                                 alt={featured.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                             />
@@ -83,26 +51,26 @@ export default function BlogSection() {
                             </h3>
 
                             <p className="text-sm text-gray-600 leading-relaxed">
-                                {featured.desc}
+                                {featured.excerpt}
                             </p>
                         </div>
                     </Link>
 
                     {/* List */}
                     <div className="flex flex-col gap-4">
-                        {blogs.map((item) => (
+                        {rest.map((post) => (
                             <Link
-                                key={item.id}
-                                href={item.href}
+                                key={post.slug}
+                                href={`/blog/${post.slug}`}
                                 className="p-4 bg-white rounded-xl border border-gray-100 hover:border-green-200 hover:shadow-sm transition group"
                             >
                                 <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
                                     <Calendar size={14} />
-                                    {item.date}
+                                    {post.date}
                                 </div>
 
                                 <h4 className="text-sm font-medium text-gray-800 group-hover:text-green-700 transition">
-                                    {item.title}
+                                    {post.title}
                                 </h4>
                             </Link>
                         ))}

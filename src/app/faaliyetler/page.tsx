@@ -10,6 +10,7 @@ export default function FaaliyetlerPage() {
             <PageHero
                 title="FAALİYETLERİMİZ"
                 subtitle="Toplumsal Destek Alanlarımız"
+                image="/banner.png"
                 breadcrumbs={[
                     { label: "Ana Sayfa", href: "/" },
                     { label: "Faaliyetlerimiz" },

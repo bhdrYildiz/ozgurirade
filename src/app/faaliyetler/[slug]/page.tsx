@@ -21,6 +21,7 @@ export default function FaaliyetDetay({ params }: Props) {
             <PageHero
                 title={item.title}
                 subtitle={item.subtitle}
+                image="/banner.png"
                 breadcrumbs={[
                     { label: "Ana Sayfa", href: "/" },
                     { label: "Faaliyetler", href: "/faaliyetler" },

@@ -1,38 +1,40 @@
 'use client'
+import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef } from 'react'
 
 const slides = [
     {
-        tag: 'Kurban Bağışı',
-        title: ['Kurban Beraber', 'Olsun'],
-        desc: 'Bağışlarınızla gönüller bir, kurban beraber olsun.',
-        bg: 'from-[#0d2b14] to-[#1a4a1e]',
-        href: '/bagis/kurban',
+        tag: 'Yetim Kardeş Programı',
+        title: ['Yetim Kardeş Programı Genişledi'],
+        desc: "Yetim kardeş programımıza katılan gönüllü sayısı 200'ü aştı. Program artık 5 ülkede 380 yetim çocuğa ulaşıyor.",
+        image: '/hero-foto.jpg',
+        href: '/haberler/yetim-kardes-programi-genisledi',
     },
     {
         tag: 'Yetim Hâmiliği',
         title: ['Yetime Şefkatli', 'Bir El Uzat'],
         desc: 'Yetime şefkatli bir kalbin hâmiliği yakışır.',
-        bg: 'from-[#0f1f2b] to-[#0d2b1a]',
+        image: '/hero-2.jpg',
         href: '/bagis/yetim',
     },
     {
         tag: 'Acil Yardım — Gazze',
         title: ['Gazze İçin', 'Hazırız'],
         desc: "Ateşkesin ardından Gazze'de yaraları sarmak için çalışıyoruz.",
-        bg: 'from-[#121212] to-[#1c1c1c]',
+        image: '/hero-foto.jpg',
         href: '/bagis/filistin',
     },
     {
         tag: 'Acil Yardım — Sudan',
         title: ['Sudan Acil', 'Yardım'],
         desc: 'Sudan halkına desteklerinizi ulaştırıyoruz.',
-        bg: 'from-[#1f1200] to-[#162b0f]',
+        image: '/hero-2.jpg',
         href: '/bagis/sudan',
     },
 ]
 
-const DURATION = 5000
+
+const DURATION = 8000
 
 export default function Hero() {
     const [cur, setCur] = useState(0)
@@ -70,15 +72,20 @@ export default function Hero() {
 
     return (
         <section className="relative h-[420px] md:h-[500px] overflow-hidden bg-[#0c1a10] rounded-2xl mx-4 md:mx-8 my-4">
-
-            {/* Slides */}
             {slides.map((s, i) => (
                 <div
-                    key={i}
-                    className={`absolute inset-0 bg-gradient-to-br ${s.bg} transition-opacity duration-700 ${i === cur ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    className={`absolute inset-0 transition-opacity duration-700 ${i === cur ? 'opacity-100' : 'opacity-0'
                         }`}
                 >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <Image
+                        src={s.image}
+                        alt={s.tag}
+                        fill
+                        priority={i === 0}
+                        className="object-cover"
+                    />
+                    {/* dark overlay only */}
+                    <div className="absolute inset-0 bg-black/20" />
                 </div>
             ))}
 
@@ -114,44 +121,44 @@ export default function Hero() {
                         Detaylı Bilgi
                     </a>
                 </div>
-        </div>
+            </div>
 
-      {/* Sağ navigasyon */ }
-    <div className="absolute bottom-10 right-8 md:right-12 z-20 flex flex-col items-end gap-3">
-        <span className="text-[10px] tracking-widest text-white/40">
-            {String(cur + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-        </span>
-        <div className="flex flex-col gap-1.5">
-            {slides.map((_, i) => (
-                <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    className={`w-px transition-all duration-300 ${i === cur ? 'h-7 bg-white/80' : 'h-4 bg-white/25'
-                        }`}
-                />
-            ))}
-        </div>
-        <div className="flex gap-1.5">
-            <button
-                onClick={prev}
-                className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
-            >
-                ←
-            </button>
-            <button
-                onClick={next}
-                className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
-            >
-                →
-            </button>
-        </div>
-    </div>
+            {/* Sağ navigasyon */}
+            <div className="absolute bottom-10 right-8 md:right-12 z-20 flex flex-col items-end gap-3">
+                <span className="text-[10px] tracking-widest text-white/40">
+                    {String(cur + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+                </span>
+                <div className="flex flex-col gap-1.5">
+                    {slides.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => goTo(i)}
+                            className={`w-px transition-all duration-300 ${i === cur ? 'h-7 bg-white/80' : 'h-4 bg-white/25'
+                                }`}
+                        />
+                    ))}
+                </div>
+                <div className="flex gap-1.5">
+                    <button
+                        onClick={prev}
+                        className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
+                    >
+                        ←
+                    </button>
+                    <button
+                        onClick={next}
+                        className="w-7 h-7 border border-white/25 bg-white/5 text-white/70 hover:bg-white/12 transition-colors text-xs flex items-center justify-center"
+                    >
+                        →
+                    </button>
+                </div>
+            </div>
 
-    {/* Progress bar */ }
-    <div
-        className="absolute bottom-0 left-0 h-[2px] bg-white/60 z-20 rounded-b-2xl"
-        style={{ width: `${progress}%`, transition: 'none' }}
-    />
-    </section >
-  )
+            {/* Progress bar */}
+            <div
+                className="absolute bottom-0 left-0 h-[2px] bg-white/60 z-20 rounded-b-2xl"
+                style={{ width: `${progress}%`, transition: 'none' }}
+            />
+        </section >
+    )
 }

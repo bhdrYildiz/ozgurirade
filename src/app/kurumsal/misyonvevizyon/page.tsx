@@ -7,6 +7,7 @@ export default function MisyonVizyonPage() {
             <PageHero
                 title="Misyon & Vizyon"
                 subtitle="Gelişerek Değiştirmek, Birlikte Güçlenmek"
+                image="/banner.png"
                 breadcrumbs={[
                     { label: "Ana Sayfa", href: "/" },
                     { label: "Kurumsal", href: "/kurumsal/misyonvevizyon" },

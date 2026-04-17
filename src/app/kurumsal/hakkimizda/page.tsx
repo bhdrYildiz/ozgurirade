@@ -7,6 +7,7 @@ export default function HakkimizdaPage() {
             <PageHero
                 title="Hakkımızda"
                 subtitle="İyiliği Paylaşarak, Bilgiyi Çoğaltarak"
+                image="/banner.png"
                 breadcrumbs={[
                     { label: "Ana Sayfa", href: "/" },
                     { label: "Kurumsal", href: "/kurumsal/hakkimizda" },

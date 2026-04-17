@@ -6,6 +6,7 @@ export default function IletisimPage() {
             <PageHero
                 title="İletişim"
                 subtitle="Size Bir İyilik Kadar Uzağız"
+                image="/banner.png"
                 breadcrumbs={[
                     { label: "Ana Sayfa", href: "/" },
                     { label: "İletişim" },
@@ -25,13 +26,9 @@ export default function IletisimPage() {
                     title="Dernek Konumu"
                 />
             </div>
-
-            {/* İçerik */}
             <section className="py-16 bg-white">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-
-                        {/* Sol: İletişim Formu */}
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                                 Size bir iyilik kadar uzağız!
