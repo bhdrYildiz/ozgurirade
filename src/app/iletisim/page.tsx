@@ -56,10 +56,10 @@ export default function IletisimPage() {
                                     label="Adres"
                                     value={
                                         <span>
-                                            Ahmet Rasim Sk. No:44, Hasanpaşa<br />
-                                            Kadıköy / İstanbul<br />
+                                            Eyüpsultan <br />
+                                            Eyüp / İstanbul<br />
                                             <span className="text-gray-400 text-xs">
-                                                Mısır / Kahire (Uluslararası Temsilcilik)
+                                                İstanbul / Türkiye
                                             </span>
                                         </span>
                                     }
@@ -67,8 +67,8 @@ export default function IletisimPage() {
                                 <ContactInfoRow
                                     label="E-posta"
                                     value={
-                                        <a href="mailto:info@hayattaiyilikvar.org" className="hover:text-emerald-600 transition">
-                                            info@hayattaiyilikvar.org
+                                        <a href="mailto:info@ozgurirade.org" className="hover:text-emerald-600 transition">
+                                            info@ozgurirade.org
                                         </a>
                                     }
                                 />
@@ -95,7 +95,7 @@ export default function IletisimPage() {
                                             rel="noopener noreferrer"
                                             className="hover:text-emerald-600 transition"
                                         >
-                                            www.hayattaiyilikvar.org
+                                            www.ozgurirade.org
                                         </a>
                                     }
                                 />

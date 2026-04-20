@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Calendar, ArrowRight } from 'lucide-react'
 import PageHero from '@/app/components/ui/PageHero'
-import { getFeaturedPost, getNonFeaturedPosts, type BlogPost } from './data/blog'
+import { getFeaturedPost, getNonFeaturedPosts } from './data/blog'
 
 export const metadata: Metadata = {
     title: 'Blog | Özgür İrade Derneği',

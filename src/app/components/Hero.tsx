@@ -74,6 +74,7 @@ export default function Hero() {
         <section className="relative h-[420px] md:h-[500px] overflow-hidden bg-[#0c1a10] rounded-2xl mx-4 md:mx-8 my-4">
             {slides.map((s, i) => (
                 <div
+                    key={i}
                     className={`absolute inset-0 transition-opacity duration-700 ${i === cur ? 'opacity-100' : 'opacity-0'
                         }`}
                 >

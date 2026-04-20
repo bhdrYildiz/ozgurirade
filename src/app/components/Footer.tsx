@@ -2,8 +2,7 @@ import Link from 'next/link'
 import {
     Mail,
     Phone,
-    MapPin,
-    Heart
+    MapPin
 } from 'lucide-react'
 import Image from 'next/image'
 
