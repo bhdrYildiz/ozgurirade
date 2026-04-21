@@ -7,6 +7,7 @@ import {
     getAllCategories,
     formatDate,
 } from './data/news'
+import Image from 'next/image'
 
 export const metadata = {
     title: 'Haberler | Özgür İrade Derneği',
@@ -31,8 +32,6 @@ export default function HaberlerPage() {
             />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 w-full">
-
-                {/* ── Öne Çıkan Haberler ─────────────────────────────────── */}
                 {featured.length > 0 && (
                     <section className="mb-16">
                         <div className="flex items-center gap-3 mb-8">
@@ -47,24 +46,23 @@ export default function HaberlerPage() {
                                 <Link
                                     key={item.slug}
                                     href={`/haberler/${item.slug}`}
-                                    className="group relative rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 bg-white"
+                                    className="group relative rounded-2xl overflow-hidden border border-gray-100 hover:shadow-sm transition-all duration-300 bg-white"
                                 >
-                                    {/* Görsel */}
-                                    <div className={`overflow-hidden ${i === 0 ? 'h-64' : 'h-56'}`}>
-                                        <img
+                                    <div className={`relative overflow-hidden ${i === 0 ? 'h-64' : 'h-56'}`}>
+                                        <Image
                                             src={item.coverImage}
                                             alt={item.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                            placeholder="blur"
+                                            blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-t to-transparent" />
                                     </div>
-
-                                    {/* Kategori badge */}
                                     <span className={`absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full ${[item.category]}`}>
                                         {item.category}
                                     </span>
 
-                                    {/* İçerik */}
                                     <div className="p-6">
                                         <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
                                             <Calendar size={13} />
@@ -95,7 +93,6 @@ export default function HaberlerPage() {
 
                 <div className="grid lg:grid-cols-[1fr_280px] gap-10">
 
-                    {/* ── Haber Listesi ──────────────────────────────────── */}
                     <section>
                         <div className="flex items-center gap-3 mb-8">
                             <span className="w-1 h-6 bg-green-600 rounded-full" />
@@ -113,16 +110,17 @@ export default function HaberlerPage() {
 hover:-translate-y-1 hover:shadow-xl hover:border-green-100
 transition-all duration-300 ease-out"
                                 >
-                                    {/* Küçük görsel */}
-                                    <div className="w-28 h-24 flex-shrink-0 rounded-xl overflow-hidden">
-                                        <img
+                                    <div className="relative w-28 h-24 flex-shrink-0 rounded-xl overflow-hidden">
+                                        <Image
                                             src={item.coverImage}
                                             alt={item.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                            placeholder="blur"
+                                            blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                         />
                                     </div>
 
-                                    {/* İçerik */}
                                     <div className="flex flex-col justify-between flex-1 min-w-0">
                                         <div>
                                             <div className="flex items-center gap-2 mb-2">
@@ -154,10 +152,8 @@ transition-all duration-300 ease-out"
                         </div>
                     </section>
 
-                    {/* ── Sidebar ────────────────────────────────────────── */}
                     <aside className="flex flex-col gap-6">
 
-                        {/* Kategoriler */}
                         <div className="border border-gray-100 rounded-2xl p-5 bg-white">
                             <h3 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">
                                 Kategoriler
@@ -187,7 +183,6 @@ hover:bg-gray-50 transition-all duration-200"
                             </div>
                         </div>
 
-                        {/* Son Haberler */}
                         <div className="border border-gray-100 rounded-2xl p-5 bg-white">
                             <h3 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">
                                 Son Haberler
@@ -199,11 +194,14 @@ hover:bg-gray-50 transition-all duration-200"
                                         href={`/haberler/${item.slug}`}
                                         className="group flex gap-3"
                                     >
-                                        <div className="w-14 h-12 flex-shrink-0 rounded-lg overflow-hidden">
-                                            <img
+                                        <div className="relative w-14 h-12 flex-shrink-0 rounded-lg overflow-hidden">
+                                            <Image
                                                 src={item.coverImage}
                                                 alt={item.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                fill
+                                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                placeholder="blur"
+                                                blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                             />
                                         </div>
                                         <div>
@@ -217,12 +215,10 @@ hover:bg-gray-50 transition-all duration-200"
                             </div>
                         </div>
 
-                        {/* Bağış CTA */}
                         <div className="relative rounded-2xl p-6 overflow-hidden
 bg-gradient-to-br from-green-600 to-green-700 text-white
 shadow-lg hover:shadow-2xl transition-all duration-500 group">
 
-                            {/* glow efekti */}
                             <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
 
                             <p className="text-xs uppercase tracking-widest opacity-70 mb-2">

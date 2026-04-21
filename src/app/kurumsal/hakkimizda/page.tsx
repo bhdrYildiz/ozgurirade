@@ -18,7 +18,6 @@ export default function HakkimizdaPage() {
             <section className="py-16 bg-white">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
-                    {/* Giriş */}
                     <div className="mb-10 text-center">
                         <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3">
                             “İnsan neyi değiştirebilir?”
@@ -29,8 +28,7 @@ export default function HakkimizdaPage() {
                         </p>
                     </div>
 
-                    {/* İçerik */}
-                    <div className="space-y-6 text-gray-600 leading-relaxed text-sm">
+                    <div className="space-y-6 text-gray-700 leading-relaxed text-base">
 
                         <p>
                             Özgür İrade Aile ve Sosyal Yardımlaşma Derneği olarak, sadece

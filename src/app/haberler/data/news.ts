@@ -57,7 +57,7 @@ Bu organizasyonun hayata geçmesinde katkı sağlayan tüm bağışçılarımız
     category: "Genel",
     date: "2026-04-12",
     author: "Özgür İrade Derneği",
-    coverImage: "/images/news1.jpg",
+    coverImage: "/erzakyardimi.jpg",
     featured: true,
     tags: ["yardım", "gıda", "aile"],
   },
@@ -84,7 +84,7 @@ Detaylı bilgi ve başvuru formu için iletişim sayfamızı ziyaret edebilirsin
     category: "Eğitim",
     date: "2026-03-25",
     author: "Eğitim Birimi",
-    coverImage: "/images/news1.jpg",
+    coverImage: "/egitimbursu.jpg",
     featured: true,
     tags: ["burs", "eğitim", "öğrenci"],
   },
@@ -107,13 +107,11 @@ Programa katılmak için web sitemiz üzerinden ya da derneğimizi arayarak baş
     category: "Yetim",
     date: "2026-03-10",
     author: "Sosyal Hizmetler Birimi",
-    coverImage: "/images/news3.jpg",
+    coverImage: "/yetim-kardes.jpg",
     featured: false,
     tags: ["yetim", "gönüllü", "program"],
   },
 ];
-
-// ─── Yardımcı Fonksiyonlar ────────────────────────────────────────────────────
 
 export function getAllNews(): NewsArticle[] {
   return newsArticles.sort(

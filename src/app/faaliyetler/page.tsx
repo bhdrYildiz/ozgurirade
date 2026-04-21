@@ -1,11 +1,12 @@
 import PageHero from "@/app/components/ui/PageHero";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { services } from "./data/services"
 
 export default function FaaliyetlerPage() {
     return (
-        <main className="flex flex-col bg-white">
+        <main className="flex flex-col bg-white min-h-screen">
 
             <PageHero
                 title="FAALİYETLERİMİZ"
@@ -17,72 +18,54 @@ export default function FaaliyetlerPage() {
                 ]}
             />
 
-            {/* Content */}
             <section className="bg-white">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
 
-                    {/* Header */}
-                    <div className="text-center mb-14">
-                        <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-3">
-                            Faaliyetler
-                        </p>
-
-                        <h1 className="text-3xl md:text-4xl font-bold text-green-700 mb-4">
-                            Toplumsal Destek Alanlarımız
-                        </h1>
-
-                        <div className="mx-auto mb-6 h-[1px] w-20 bg-gray-200" />
-
-                        <p className="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed">
-                            Toplumun farklı ihtiyaç alanlarına yönelik geliştirdiğimiz projeler ile
-                            sürdürülebilir destek sağlıyoruz.
-                        </p>
+                    {/* Başlık */}
+                    <div className="flex items-center gap-3 mb-10">
+                        <span className="w-1 h-6 bg-green-600 rounded-full" />
+                        <h2 className="text-xl font-semibold text-gray-800">
+                            Tüm Faaliyetler
+                        </h2>
                     </div>
 
-                    {/* Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {services.map((item) => (
-                            <article
+                            <Link
                                 key={item.slug}
-                                className="group border border-gray-100 rounded-2xl bg-white hover:shadow-lg transition duration-300"
+                                href={`/faaliyetler/${item.slug}`}
+                                className="group border border-gray-100 rounded-2xl overflow-hidden bg-white hover:shadow-xl hover:border-green-100 transition-all duration-300"
                             >
-                                <div className="p-8 flex flex-col h-full">
+                                <div className="relative h-48 overflow-hidden bg-gray-100">
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        placeholder="blur"
+                                        blurDataURL="data:image/png;base64,iVBORw0KGgo="
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                                </div>
 
-                                    {/* Logo */}
-                                    <div className="mb-6">
-                                        <div className="h-14 w-40 flex items-center justify-center border border-gray-100 rounded-xl bg-white">
-                                            <Image
-                                                src={item.image}
-                                                alt={item.title}
-                                                width={120}
-                                                height={50}
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-green-700 transition">
+                                <div className="p-5">
+                                    <h3 className="text-base font-semibold text-gray-800 group-hover:text-green-700 transition-colors duration-300 mb-2">
                                         {item.title}
                                     </h3>
 
-                                    {/* Desc */}
-                                    <p className="text-sm text-gray-500 leading-relaxed mb-6 line-clamp-3">
+                                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-4">
                                         {item.subtitle}
                                     </p>
 
-                                    {/* Button */}
-                                    <div className="mt-auto">
-                                        <Link
-                                            href={`/faaliyetler/${item.slug}`}
-                                            className="text-sm uppercase tracking-wide text-green-700 hover:underline"
-                                        >
-                                            Detayları Gör →
-                                        </Link>
+                                    <div className="flex items-center gap-1.5 text-sm text-green-600 font-medium">
+                                        Detayları Gör
+                                        <ArrowRight
+                                            size={14}
+                                            className="transition-transform duration-300 group-hover:translate-x-1"
+                                        />
                                     </div>
-
                                 </div>
-                            </article>
+                            </Link>
                         ))}
                     </div>
 

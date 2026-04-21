@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutSection() {
     return (
         <section className="py-16 bg-white">
@@ -36,9 +38,10 @@ export default function AboutSection() {
 
                 <div className="relative">
                     <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-md">
-                        <img
-                            src="/images/about.jpg"
+                        <Image
+                            src="/dernek-foto.jpg"
                             alt="Özgür İrade Derneği"
+                            fill
                             className="w-full h-full object-cover"
                         />
                     </div>

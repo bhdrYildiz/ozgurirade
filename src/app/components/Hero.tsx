@@ -21,14 +21,14 @@ const slides = [
         tag: 'Acil Yardım — Gazze',
         title: ['Gazze İçin', 'Hazırız'],
         desc: "Ateşkesin ardından Gazze'de yaraları sarmak için çalışıyoruz.",
-        image: '/hero-foto.jpg',
+        image: '/gazze.jpg',
         href: '/bagis/filistin',
     },
     {
         tag: 'Acil Yardım — Sudan',
         title: ['Sudan Acil', 'Yardım'],
         desc: 'Sudan halkına desteklerinizi ulaştırıyoruz.',
-        image: '/hero-2.jpg',
+        image: '/sudan-yardim.jpg',
         href: '/bagis/sudan',
     },
 ]

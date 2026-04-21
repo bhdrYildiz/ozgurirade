@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Calendar, ArrowRight } from 'lucide-react'
 import PageHero from '@/app/components/ui/PageHero'
 import { getFeaturedPost, getNonFeaturedPosts } from './data/blog'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
     title: 'Blog | Özgür İrade Derneği',
@@ -36,11 +37,14 @@ export default function BlogPage() {
                             href={`/blog/${featured.slug}`}
                             className="md:col-span-2 group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition"
                         >
-                            <div className="h-80 overflow-hidden bg-gray-100">
-                                <img
+                            <div className="relative h-80 overflow-hidden bg-gray-100">
+                                <Image
                                     src={featured.coverImage}
                                     alt={featured.title}
+                                    fill
                                     className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                                    placeholder="blur"
+                                    blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                 />
                             </div>
                             <div className="p-6">
@@ -90,7 +94,6 @@ export default function BlogPage() {
 
                     </div>
 
-                    {/* Kalan yazılar - tam kart grid */}
                     {rest.length > 4 && (
                         <>
                             <hr className="border-gray-200 mb-12" />
@@ -101,11 +104,14 @@ export default function BlogPage() {
                                         href={`/blog/${post.slug}`}
                                         className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
                                     >
-                                        <div className="h-48 overflow-hidden bg-gray-100">
-                                            <img
+                                        <div className="relative h-48 overflow-hidden bg-gray-100">
+                                            <Image
                                                 src={post.coverImage}
                                                 alt={post.title}
+                                                fill
                                                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                                                placeholder="blur"
+                                                blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                             />
                                         </div>
                                         <div className="p-5">

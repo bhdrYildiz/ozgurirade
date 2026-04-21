@@ -16,14 +16,13 @@ import {
     Droplet,
     Megaphone
 } from 'lucide-react'
+import Image from 'next/image'
 
-// ─── Static Params (SSG) ──────────────────────────────────────────────────────
 export async function generateStaticParams() {
     const news = getAllNews()
     return news.map((n) => ({ slug: n.slug }))
 }
 
-// ─── Metadata ─────────────────────────────────────────────────────────────────
 export async function generateMetadata({ params }: { params: { slug: string } }) {
     const article = getNewsBySlug(params.slug)
     if (!article) return {}
@@ -33,7 +32,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
 }
 
-// ─── Markdown-benzeri içerik render ───────────────────────────────────────────
 function renderContent(raw: string) {
     const lines = raw.trim().split('\n')
     const elements: React.ReactNode[] = []
@@ -107,7 +105,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 w-full">
                 <div className="grid lg:grid-cols-[1fr_300px] gap-12">
 
-                    {/* ── Makale ─────────────────────────────────────────── */}
                     <article>
 
                         {/* Geri butonu */}
@@ -134,31 +131,29 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                             </span>
                         </div>
 
-                        {/* Başlık */}
                         <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight mb-4">
                             {article.title}
                         </h1>
 
-                        {/* Özet */}
                         <p className="text-base text-gray-500 leading-relaxed border-l-2 border-green-500 pl-4 mb-8">
                             {article.summary}
                         </p>
 
-                        {/* Kapak görseli */}
-                        <div className="rounded-2xl overflow-hidden mb-10 border border-gray-100">
-                            <img
+                        <div className="relative rounded-2xl overflow-hidden mb-10 border border-gray-100 h-72 md:h-96">
+                            <Image
                                 src={article.coverImage}
                                 alt={article.title}
-                                className="w-full h-72 md:h-96 object-cover"
+                                fill
+                                className="object-cover"
+                                placeholder="blur"
+                                blurDataURL="data:image/png;base64,iVBORw0KGgo="
                             />
                         </div>
 
-                        {/* İçerik */}
                         <div className="space-y-2">
                             {renderContent(article.content)}
                         </div>
 
-                        {/* Etiketler */}
                         {article.tags && article.tags.length > 0 && (
                             <div className="flex flex-wrap items-center gap-2 mt-10 pt-8 border-t border-gray-100">
                                 <Tag size={14} className="text-gray-400" />
@@ -173,7 +168,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                             </div>
                         )}
 
-                        {/* Paylaş */}
                         <div className="mt-8 flex items-center gap-3">
                             <span className="text-sm text-gray-400 flex items-center gap-1.5">
                                 <Share2 size={14} />
@@ -205,7 +199,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                             </a>
                         </div>
 
-                        {/* Önceki / Sonraki */}
                         <div className="mt-10 pt-8 border-t border-gray-100 grid sm:grid-cols-2 gap-4">
                             {prev ? (
                                 <Link
@@ -239,10 +232,8 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                         </div>
                     </article>
 
-                    {/* ── Sidebar ────────────────────────────────────────── */}
                     <aside className="flex flex-col gap-6">
 
-                        {/* İlgili haberler */}
                         {related.length > 0 && (
                             <div className="border border-gray-100 rounded-2xl p-5">
                                 <h3 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">
@@ -256,10 +247,13 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                                             className="group flex gap-3"
                                         >
                                             <div className="w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden">
-                                                <img
+                                                <Image
                                                     src={item.coverImage}
                                                     alt={item.title}
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    placeholder="blur"
+                                                    blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                                 />
                                             </div>
                                             <div>
@@ -305,7 +299,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                             </div>
                         </div>
 
-                        {/* Bağış CTA */}
                         <div className="rounded-2xl bg-green-600 p-6 text-white">
                             <p className="text-xs uppercase tracking-widest opacity-75 mb-2">Destek Ol</p>
                             <h3 className="text-lg font-semibold mb-3 leading-snug">
@@ -325,7 +318,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                     </aside>
                 </div>
 
-                {/* ── İlgili Haberler (alt tam genişlik) ─────────────────── */}
                 {related.length > 0 && (
                     <section className="mt-16 pt-12 border-t border-gray-100">
                         <div className="flex items-center gap-3 mb-8">
@@ -342,10 +334,13 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                                     className="group border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
                                 >
                                     <div className="h-44 overflow-hidden">
-                                        <img
+                                        <Image
                                             src={item.coverImage}
                                             alt={item.title}
+                                            fill
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            placeholder="blur"
+                                            blurDataURL="data:image/png;base64,iVBORw0KGgo="
                                         />
                                     </div>
                                     <div className="p-5">

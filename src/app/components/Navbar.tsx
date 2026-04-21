@@ -3,8 +3,6 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import {
     ChevronDown,
-    Search,
-    X,
     GraduationCap,
     HeartPulse,
     Droplets,
@@ -35,7 +33,6 @@ type MenuKey = 'faaliyetler' | 'kurumsal' | null
 
 export default function Navbar() {
     const [activeMenu, setActiveMenu] = useState<MenuKey>(null)
-    const [searchOpen, setSearchOpen] = useState(false)
     const navRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -168,33 +165,6 @@ export default function Navbar() {
                     </Link>
                 </nav>
 
-                {/* Search */}
-                <div className="relative hidden md:flex items-center">
-                    {searchOpen ? (
-                        <div className="flex items-center gap-2">
-                            <input
-                                autoFocus
-                                type="text"
-                                placeholder="Haber arayın..."
-                                className="w-64 px-4 py-1.5 pl-9 border border-gray-200 rounded-full text-sm bg-gray-50 focus:outline-none focus:border-green-500 focus:bg-white"
-                            />
-                            <Search size={15} className="absolute left-3 text-gray-400" />
-                            <button onClick={() => setSearchOpen(false)} className="text-gray-400 hover:text-gray-600">
-                                <X size={16} />
-                            </button>
-                        </div>
-                    ) : (
-                        <button
-                            onClick={() => setSearchOpen(true)}
-                            className="flex items-center gap-2 px-4 py-1.5 border border-gray-200 rounded-full text-sm text-gray-400 bg-gray-50 hover:border-green-400 transition-colors w-52"
-                        >
-                            <Search size={14} />
-                            Haberler için arayınız...
-                        </button>
-                    )}
-                </div>
-
-                {/* Actions */}
                 <div className="flex items-center gap-2 flex-shrink-0">
                     <Link
                         href="/bagis"
