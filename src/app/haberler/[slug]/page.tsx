@@ -8,13 +8,6 @@ import {
     getRelatedNews,
     formatDate,
 } from '../data/news'
-import {
-    Newspaper,
-    GraduationCap,
-    HeartHandshake,
-    Droplet,
-    Megaphone
-} from 'lucide-react'
 import Image from 'next/image'
 
 export async function generateStaticParams() {
