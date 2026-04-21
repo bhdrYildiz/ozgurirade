@@ -14,25 +14,34 @@ export const metadata = {
     description: 'Derneğimizin güncel haberleri ve duyuruları',
 }
 
-export default function HaberlerPage() {
+export default function HaberlerPage({
+    searchParams,
+}: {
+    searchParams: { kategori?: string }
+}) {
     const allNews = getAllNews()
     const featured = getFeaturedNews().slice(0, 2)
     const categories = getAllCategories()
+
+    const selectedCategory = searchParams?.kategori
+    const filteredNews = selectedCategory
+        ? allNews.filter((n) => n.category === selectedCategory)
+        : allNews
 
     return (
         <main className="flex flex-col bg-white min-h-screen">
             <PageHero
                 title="HABERLER"
-                subtitle="Güncel Gelişmeler"
+                subtitle={selectedCategory ?? 'Güncel Gelişmeler'}
                 image="/banner.png"
                 breadcrumbs={[
-                    { label: "Ana Sayfa", href: "/" },
-                    { label: "Haberler" },
+                    { label: 'Ana Sayfa', href: '/' },
+                    { label: 'Haberler' },
                 ]}
             />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 w-full">
-                {featured.length > 0 && (
+                {!selectedCategory && featured.length > 0 && (
                     <section className="mb-16">
                         <div className="flex items-center gap-3 mb-8">
                             <span className="w-1 h-6 bg-green-600 rounded-full" />
@@ -59,7 +68,7 @@ export default function HaberlerPage() {
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t to-transparent" />
                                     </div>
-                                    <span className={`absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full ${[item.category]}`}>
+                                    <span className="absolute top-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-white/80 text-gray-700">
                                         {item.category}
                                     </span>
 
@@ -92,68 +101,72 @@ export default function HaberlerPage() {
                 )}
 
                 <div className="grid lg:grid-cols-[1fr_280px] gap-10">
-
                     <section>
                         <div className="flex items-center gap-3 mb-8">
                             <span className="w-1 h-6 bg-green-600 rounded-full" />
                             <h2 className="text-xl font-semibold text-gray-800">
-                                Tüm Haberler
+                                {selectedCategory ? selectedCategory : 'Tüm Haberler'}
                             </h2>
                         </div>
 
                         <div className="flex flex-col gap-6">
-                            {allNews.map((item) => (
-                                <Link
-                                    key={item.slug}
-                                    href={`/haberler/${item.slug}`}
-                                    className="group flex gap-5 border border-gray-100 rounded-2xl p-4 bg-white
+                            {filteredNews.length > 0 ? (
+                                filteredNews.map((item) => (
+                                    <Link
+                                        key={item.slug}
+                                        href={`/haberler/${item.slug}`}
+                                        className="group flex gap-5 border border-gray-100 rounded-2xl p-4 bg-white
 hover:-translate-y-1 hover:shadow-xl hover:border-green-100
 transition-all duration-300 ease-out"
-                                >
-                                    <div className="relative w-28 h-24 flex-shrink-0 rounded-xl overflow-hidden">
-                                        <Image
-                                            src={item.coverImage}
-                                            alt={item.title}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                            placeholder="blur"
-                                            blurDataURL="data:image/png;base64,iVBORw0KGgo="
-                                        />
-                                    </div>
+                                    >
+                                        <div className="relative w-28 h-24 flex-shrink-0 rounded-xl overflow-hidden">
+                                            <Image
+                                                src={item.coverImage}
+                                                alt={item.title}
+                                                fill
+                                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                placeholder="blur"
+                                                blurDataURL="data:image/png;base64,iVBORw0KGgo="
+                                            />
+                                        </div>
 
-                                    <div className="flex flex-col justify-between flex-1 min-w-0">
-                                        <div>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${[item.category]}`}>
-                                                    {item.category}
-                                                </span>
-                                                <span className="flex items-center gap-1 text-xs text-gray-400">
-                                                    <Calendar size={12} />
-                                                    {formatDate(item.date)}
-                                                </span>
+                                        <div className="flex flex-col justify-between flex-1 min-w-0">
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                                                        {item.category}
+                                                    </span>
+                                                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                                                        <Calendar size={12} />
+                                                        {formatDate(item.date)}
+                                                    </span>
+                                                </div>
+
+                                                <h3 className="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors duration-300 line-clamp-2 leading-snug">
+                                                    {item.title}
+                                                </h3>
+
+                                                <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                                                    {item.summary}
+                                                </p>
                                             </div>
 
-                                            <h3 className="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors duration-300 line-clamp-2 leading-snug">
-                                                {item.title}
-                                            </h3>
-
-                                            <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                                                {item.summary}
-                                            </p>
+                                            <div className="flex items-center gap-1 text-xs text-green-600 mt-2 font-medium">
+                                                Oku
+                                                <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                                            </div>
                                         </div>
-
-                                        <div className="flex items-center gap-1 text-xs text-green-600 mt-2 font-medium">
-                                            Oku
-                                            <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
+                                    </Link>
+                                ))
+                            ) : (
+                                <p className="text-sm text-gray-400 py-8 text-center">
+                                    Bu kategoride henüz haber bulunmamaktadır.
+                                </p>
+                            )}
                         </div>
                     </section>
 
                     <aside className="flex flex-col gap-6">
-
                         <div className="border border-gray-100 rounded-2xl p-5 bg-white">
                             <h3 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">
                                 Kategoriler
@@ -161,19 +174,27 @@ transition-all duration-300 ease-out"
                             <div className="flex flex-col gap-1">
                                 <Link
                                     href="/haberler"
-                                    className="group flex items-center justify-between px-3 py-2 rounded-xl text-sm text-gray-600
-hover:bg-gray-50 transition-all duration-200"                                >
+                                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all duration-200
+                                        ${!selectedCategory
+                                            ? 'bg-green-50 text-green-700 font-medium'
+                                            : 'text-gray-600 hover:bg-gray-50'
+                                        }`}
+                                >
                                     <span>Tüm Haberler</span>
                                     <span className="text-xs text-gray-400">{allNews.length}</span>
                                 </Link>
                                 {categories.map((cat) => {
                                     const count = allNews.filter((n) => n.category === cat).length
+                                    const isActive = selectedCategory === cat
                                     return (
                                         <Link
                                             key={cat}
                                             href={`/haberler?kategori=${encodeURIComponent(cat)}`}
-                                            className="group flex items-center justify-between px-3 py-2 rounded-xl text-sm text-gray-600
-hover:bg-gray-50 transition-all duration-200"
+                                            className={`flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all duration-200
+                                                ${isActive
+                                                    ? 'bg-green-50 text-green-700 font-medium'
+                                                    : 'text-gray-600 hover:bg-gray-50'
+                                                }`}
                                         >
                                             <span>{cat}</span>
                                             <span className="text-xs text-gray-400">{count}</span>
@@ -218,7 +239,6 @@ hover:bg-gray-50 transition-all duration-200"
                         <div className="relative rounded-2xl p-6 overflow-hidden
 bg-gradient-to-br from-green-600 to-green-700 text-white
 shadow-lg hover:shadow-2xl transition-all duration-500 group">
-
                             <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
 
                             <p className="text-xs uppercase tracking-widest opacity-70 mb-2">

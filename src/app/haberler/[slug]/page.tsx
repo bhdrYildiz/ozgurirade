@@ -8,7 +8,6 @@ import {
     getRelatedNews,
     formatDate,
 } from '../data/news'
-import { NewsCategories } from '../data/news'
 import {
     Newspaper,
     GraduationCap,
@@ -66,7 +65,6 @@ function renderContent(raw: string) {
     return elements
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function HaberDetayPage({ params }: { params: { slug: string } }) {
     const article = getNewsBySlug(params.slug)
     if (!article) notFound()
@@ -106,8 +104,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                 <div className="grid lg:grid-cols-[1fr_300px] gap-12">
 
                     <article>
-
-                        {/* Geri butonu */}
                         <Link
                             href="/haberler"
                             className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-green-700 transition-colors mb-8"
@@ -267,38 +263,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
                                 </div>
                             </div>
                         )}
-
-                        <div className="border border-gray-100 rounded-2xl p-5 bg-white">
-                            <h3 className="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">
-                                Kategoriler
-                            </h3>
-
-                            <div className="flex flex-wrap gap-2">
-                                {NewsCategories.map((cat) => {
-                                    const Icon = categoryIcons[cat]
-
-                                    return (
-                                        <Link
-                                            key={cat}
-                                            href={`/haberler?kategori=${encodeURIComponent(cat)}`}
-                                            className="group flex items-center gap-1.5 text-xs font-medium
-                    px-3 py-1.5 rounded-lg border border-gray-100 bg-gray-50 text-gray-600
-                    hover:bg-white hover:border-green-200 hover:text-green-700
-                    transition-all duration-200"
-                                        >
-                                            {Icon && (
-                                                <Icon
-                                                    size={12}
-                                                    className="text-gray-400 group-hover:text-green-600 transition-colors"
-                                                />
-                                            )}
-                                            {cat}
-                                        </Link>
-                                    )
-                                })}
-                            </div>
-                        </div>
-
                         <div className="rounded-2xl bg-green-600 p-6 text-white">
                             <p className="text-xs uppercase tracking-widest opacity-75 mb-2">Destek Ol</p>
                             <h3 className="text-lg font-semibold mb-3 leading-snug">

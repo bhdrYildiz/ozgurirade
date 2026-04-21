@@ -1,13 +1,4 @@
-export type NewsCategory =
-  | "Genel"
-  | "Eğitim"
-  | "Sağlık"
-  | "Su Kuyusu"
-  | "Yetim"
-  | "Ramazan"
-  | "Kurban"
-  | "Zekat"
-  | "Duyuru";
+export type NewsCategory = "Genel" | "Eğitim" | "Yetim";
 
 export interface NewsArticle {
   slug: string;
@@ -21,17 +12,7 @@ export interface NewsArticle {
   featured?: boolean;
   tags?: string[];
 }
-export const NewsCategories: NewsCategory[] = [
-  "Genel",
-  "Eğitim",
-  "Sağlık",
-  "Su Kuyusu",
-  "Yetim",
-  "Ramazan",
-  "Kurban",
-  "Zekat",
-  "Duyuru",
-];
+export const NewsCategories: NewsCategory[] = ["Genel", "Eğitim", "Yetim"];
 
 export const newsArticles: NewsArticle[] = [
   {
