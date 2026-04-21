@@ -74,19 +74,6 @@ export default function HaberDetayPage({ params }: { params: { slug: string } })
     const currentIndex = allNews.findIndex((n) => n.slug === params.slug)
     const prev = currentIndex < allNews.length - 1 ? allNews[currentIndex + 1] : null
     const next = currentIndex > 0 ? allNews[currentIndex - 1] : null
-
-    const categoryIcons = {
-        Genel: Newspaper,
-        Eğitim: GraduationCap,
-        Sağlık: HeartHandshake,
-        'Su Kuyusu': Droplet,
-        Yetim: HeartHandshake,
-        Ramazan: HeartHandshake,
-        Kurban: HeartHandshake,
-        Zekat: HeartHandshake,
-        Duyuru: Megaphone,
-    }
-
     return (
         <main className="flex flex-col bg-white min-h-screen">
             <PageHero

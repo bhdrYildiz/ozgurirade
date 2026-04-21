@@ -14,7 +14,7 @@ export default function AboutSection() {
                     </h3>
 
                     <p className="italic text-gray-500 mb-4 md:mb-6 text-sm md:text-base">
-                        "Özgür Seçim, Bilinçli Toplum, Güçlü Aile"
+                        &quot;Özgür Seçim, Bilinçli Toplum, Güçlü Aile&quot;
                     </p>
 
                     <div className="space-y-3 md:space-y-4 text-gray-600 text-sm leading-relaxed">
