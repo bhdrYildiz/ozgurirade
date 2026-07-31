@@ -12,11 +12,10 @@ export default function IletisimPage() {
                     { label: "İletişim" },
                 ]}
             />
-            {/* Harita */}
             <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-12">
                 <div className="w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-md">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.9838199896585!2d28.924174976154926!3d41.04748291700985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab09facdfdd3f%3A0x8ef73e3ab861045d!2zRMO8xJ9tZWNpbGVyLCBPbHVrbHUgQmF5xLFyIFNrLiBObzo3LCAzNDA1NSBFecO8cHN1bHRhbi_EsHN0YW5idWw!5e0!3m2!1str!2str!4v1776759859075!5m2!1str!2str"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.384352178171!2d28.9390718!3d41.0168464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa382ec143fb3%3A0xda016a5de5bf299d!2zRW5uZWFncmFtIEXEn2l0aW0gdmUgRGFuxLHFn21hbmzEsWs!5e0!3m2!1str!2str!4v1785494455554!5m2!1str!2str"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
@@ -55,7 +54,7 @@ export default function IletisimPage() {
                                     label="Adres"
                                     value={
                                         <span>
-                                            Düğmeciler Mahallesi Oluklu Bayır Sokak No:7 Eyüpsultan/İstanbul<br />
+                                            Molla Gürani, Zaviye Sk. No:4 Kat:3, 34096 Fatih/İstanbul<br />
                                             <span className="text-gray-400 text-xs">
                                                 İstanbul / Türkiye
                                             </span>
@@ -66,7 +65,7 @@ export default function IletisimPage() {
                                     label="E-posta"
                                     value={
                                         <a href="mailto:info@ozgurirade.org" className="hover:text-emerald-600 transition">
-                                            info@ozgurirade.com
+                                            bilgi@ozgurirade.com
                                         </a>
                                     }
                                 />
@@ -75,11 +74,7 @@ export default function IletisimPage() {
                                     value={
                                         <span>
                                             <a href="tel:+905382497264" className="hover:text-emerald-600 transition">
-                                                +90 538 249 72 64
-                                            </a>
-                                            <span className="mx-1 text-gray-400">·</span>
-                                            <a href="tel:+905315568954" className="hover:text-emerald-600 transition">
-                                                +90 531 556 89 54
+                                                +90 530 896 49 22
                                             </a>
                                         </span>
                                     }

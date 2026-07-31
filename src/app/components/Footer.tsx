@@ -8,7 +8,6 @@ export default function Footer() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
 
-                {/* Logo & Açıklama — mobilde tam genişlik */}
                 <div className="col-span-2 md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
                         <Image
@@ -62,11 +61,11 @@ export default function Footer() {
                         </li>
                         <li className="flex items-center gap-2">
                             <Phone size={15} className="flex-shrink-0" />
-                            +90 5XX XXX XX XX
+                            +90 530 896 49 22
                         </li>
                         <li className="flex items-center gap-2">
                             <Mail size={15} className="flex-shrink-0" />
-                            info@dernek.org
+                            bilgi@ozgurirade.com
                         </li>
                     </ul>
                 </div>
